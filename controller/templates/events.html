@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="my-3 mx-5">
+    <h3>イベント情報表示</h3>
+    <pre >{{ content }}</pre>
+</div>
+<div>
+    <a class="btn btn-primary my-3 mx-5" href="/predict?day={{ day }}&res={{res}}&len={{ len }}&today={{today}}&per_person={{ per_person }}&per_list={{ per_list }}&way=normal" role="button">予測結果に戻る</a>
+</div>
+{% endblock %}

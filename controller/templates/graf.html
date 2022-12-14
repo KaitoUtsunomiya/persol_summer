@@ -1,0 +1,39 @@
+ <!doctype html>
+<html lang="ja">   
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="sample.css">
+    <!--位置情報-->
+    <script>
+      function test() {
+          navigator.geolocation.getCurrentPosition(test2);
+      }
+      
+      function test2(position) {
+      
+          var geo_text = "緯度:" + position.coords.latitude + "\n";
+          geo_text += "経度:" + position.coords.longitude + "\n";
+          geo_text += "高度:" + position.coords.altitude + "\n";
+          geo_text += "位置精度:" + position.coords.accuracy + "\n";
+          geo_text += "高度精度:" + position.coords.altitudeAccuracy  + "\n";
+      
+          var date = new Date(position.timestamp);
+      
+          geo_text += "取得時刻:" + date.toLocaleString() + "\n";
+      
+          alert(geo_text);
+      
+      }
+      </script>
+  </head>
+  
+  <body>
+    <!--グラフ表示-->
+    <canvas id="stage"></canvas>
+    <!--位置情報ボタン-->
+    <button onclick="test()">test</button>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
+    <script type="text/javascript" src="graf.js"></script>
+  </body>
+</html>

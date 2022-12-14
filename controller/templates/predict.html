@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="row" style="width:100% !important">
+    <div class="col-9">
+        <main  class="my-3 mx-auto" style = "width:70%; text-align:center;" style="float:left;">
+            <div class="my-3">
+                <h3>来客数予測結果</h3>
+                <a>{{ day }}{{ ans }}</a>
+                <div>
+                    <a class="btn btn-primary my-3 mx-5" href="/predict?day={{ day }}&len={{ len }}&per_person={{ per_person }}&per_list={{ per_list }}&way=before" role="button"><i class="bi bi-caret-left"></i>前日へ</a>
+
+                    <a class="btn btn-primary my-3 mx-5" href="/predict?day={{ day }}&len={{ len }}&per_person={{ per_person }}&per_list={{ per_list }}&way=after" role="button">翌日へ<i class="bi bi-caret-right"></i></a>
+                </div>
+                <iframe src="{{ url_for('static', filename='image/graph.html') }}" width="120%" height=" 500"></iframe>
+
+                {%if len == '1日' %}
+                <table class="table table-bordered mx-auto"  style="width: 80%">
+                    <thead class="thead-light" style="background-color:#ECECEA;">
+                      <tr>
+                        <th scope="col">11時</th>
+                        <th scope="col">12時</th>
+                        <th scope="col">13時</th>
+                        <th scope="col">14時</th>
+                        <th scope="col">15時</th>
+                        <th scope="col">16時</th>
+                        <th scope="col">17時</th>
+                        <th scope="col">18時</th>
+                        <th scope="col">19時</th>
+                        <th scope="col">20時</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        {%for i in per_list %}
+                            <td>{{i}}人</td>
+                        {% endfor %}
+                      </tr>
+                    </tbody>
+                </table>
+                {% endif %}
+                <div>
+                    <a class="btn btn-primary my-3 mx-3" href="/get_weather?day={{ day }}&res={{res}}&len={{ len }}&today={{today}}&per_person={{ per_person }}&per_list={{ per_list }}&way=normal" role="button"><i class="bi bi-cloud-sun"></i>天気情報</a>
+                    <a class="btn btn-primary my-3 mx-3" href="/get_event?day={{ day }}&res={{res}}&len={{ len }}&today={{today}}&per_person={{ per_person }}&per_list={{ per_list }}&way=normal" role="button"><i class="bi bi-calendar-event"></i>イベント情報</a>
+                </div>
+            </div>
+        </main>
+    </div>
+
+
+    <div class="col-3">
+        <main style="float:right;">
+            <div class="d-flex flex-column p-3 bg-light" style="height:100vh;">
+                
+                <hr>
+                <ul class="nav nav-pills flex-column mb-auto">
+                <li>
+                    <form class="m-5" action="/predict" method="POST">
+                        <div>
+                            <div class="mb-3">
+                                <label for="day" style="border-left: inset 5px #2B71F4;">予測開始日時</label>
+                                <div my-3>
+                                    <input type="date" class="form-control" name="day" value="{{ today }}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div>
+                                <label for="len" style="border-left: inset 5px #2B71F4;">予測期間</label>
+                            </div>
+                            <select name="len" style = "width:159px;" required>
+                                <option value="" hidden>---</option>
+                                <option>1日</option>
+                                <option>1週間</option>
+                                <option>1か月</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <div>
+                                <label for="per_person" style="border-left: inset 5px #2B71F4;">対応可能客数/1人</label>
+                            </div>
+                            <select name="per_person" style = "width:159px;" required>
+                                <option value={{per_person}} >{{per_person}}</option>
+                                <option>1人</option>
+                                <option>2人</option>
+                                <option>3人</option>
+                                <option>4人</option>
+                                <option>5人</option>
+                                <option>6人</option>
+                                <option>7人</option>
+                                <option>8人</option>
+                                <option>9人</option>
+                                <option>10人</option>
+                                <option>11人</option>
+                                <option>12人</option>
+                                <option>13人</option>
+                                <option>14人</option>
+                                <option>15人</option>
+                                <option>16人</option>
+                                <option>17人</option>
+                                <option>18人</option>
+                                <option>19人</option>
+                                <option>20人</option>
+                            </select>
+                        </div>
+                        <div style="text-align: center;">
+                            <button type="submit" class="btn btn-primary"><i class="bi bi-graph-up-arrow"></i>予測開始</button>
+                        </div>
+                
+                    </form>
+                </li>
+                </ul>
+                <hr>
+            </div>
+        </main>
+    </div>
+</div>
+{% endblock %}

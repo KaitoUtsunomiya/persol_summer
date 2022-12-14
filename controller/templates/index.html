@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="my-3 mx-auto" style = "width:70%; text-align:center;">
+    <h3>予測結果</h3>
+    <a>{{ day }}{{ ans }}</a>
+    <figure>
+        <img class="d-block mx-auto border" src="{{ url_for('static', filename='image/graph_person.png') }}" alt="来客数">
+        <figcaption>来客数予測結果</figcaption>
+    </figure>
+    <div>
+        <a class="btn btn-primary my-3 mx-3" href="/get_weather" role="button">天気情報</a>
+        <a class="btn btn-primary my-3 mx-3" href="/get_event" role="button">イベント情報</a>
+    </div>
+</div>
+{% endblock %}
